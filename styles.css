@@ -197,6 +197,7 @@ b { font-weight: 700; font-style: italic; }
   color: var(--tc);
   padding-top: var(--nav-h);
 }
+.ghost {
   position: absolute; left: 0; white-space: nowrap; pointer-events: none; user-select: none;
   font-size: clamp(5rem, 27.85vw, 25rem); line-height: 0.865; color: var(--tc);
   opacity: 0.1;
@@ -205,7 +206,7 @@ b { font-weight: 700; font-style: italic; }
 .ghost--b { top: 6%; margin-top: 0.8em; translate: calc(var(--wp) * 40vw - 60vw) 0; }
 
 .news__track {
-  position: relative; z-index: 2; display: flex; gap: 33px; align-items: flex-end;
+  position: relative; z-index: 2; display: flex; gap: 33px; align-items: stretch;
   padding: 0 clamp(20px, 8vw, 150px);
   width: max-content; will-change: transform;
   transform: translateX(calc(var(--tx, 0) * 1px));
