@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>21 Kafe — From dawn till late, 21 hours of great taste</title>
+  <meta name="description" content="21 Kafe buka 21 jam. Matcha, makanan, dan kue dari pagi hingga larut malam.">
+  <meta name="theme-color" content="#1c5844">
+  <link rel="stylesheet" href="styles.css">
+  <script src="vendor/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="nav">
+    <div class="nav__pill" id="navPill">
+      <a class="nav__home nav__home--m" href="#top" aria-label="Kembali ke atas">
+        <img src="assets/home-button.png" alt="">
+      </a>
+
+      <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="navlinks" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav__group" id="navGroup">
+        <span class="nav__bubble" id="bubble" aria-hidden="true"></span>
+        <ul class="nav__links" id="navlinks">
+          <li><a href="#food">Menu</a></li>
+          <li><a href="#everyday">About</a></li>
+          <li class="nav__homeli">
+            <a class="nav__home nav__home--d" href="#top" aria-label="Kembali ke atas"><img src="assets/home-button.png" alt=""></a>
+          </li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#news">News</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__pin">
+        <div class="hero__bg"></div>
+        <div class="hero__photo" aria-hidden="true"></div>
+        <img class="hero__21" src="assets/logo-21.svg" alt="" aria-hidden="true">
+
+        <div class="hero__content">
+          <h1 class="hero__title">
+            <span class="line"><span>From dawn till late, 21</span></span>
+            <span class="line"><span>hours of great taste.</span></span>
+          </h1>
+          <a class="hero__cta" href="#news"><span>Scroll down for more.</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATS NEW (scroll horizontal) -->
+    <section class="news" id="news" aria-labelledby="news-title">
+      <div class="news__pin">
+        <p class="ghost ghost--a" aria-hidden="true"><b>Whats</b> New?</p>
+        <p class="ghost ghost--b" aria-hidden="true"><b>Whats</b> New?</p>
+
+        <h2 class="news__title" id="news-title"><b>Whats</b> New?</h2>
+
+        <div class="news__track" id="newsTrack">
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-1.jpg" alt="Matcha Cheese" loading="lazy"></div>
+            <h3>Matcha Cheese</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-2.jpg" alt="Matcha Mint" loading="lazy"></div>
+            <h3>Matcha Mint</h3>
+            <p>A refreshing twist to keep you energized all day long</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-3.jpg" alt="Matcha Strawberry" loading="lazy"></div>
+            <h3>Matcha Strawberry</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-4.jpg" alt="Matcha Honey" loading="lazy"></div>
+            <h3>Matcha Honey</h3>
+            <p>Sweetened naturally for a smooth and comforting sip</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-1.jpg" alt="Matcha Cheese" loading="lazy"></div>
+            <h3>Matcha Cheese</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-2.jpg" alt="Matcha Mint" loading="lazy"></div>
+            <h3>Matcha Mint</h3>
+            <p>A refreshing twist to keep you energized all day long</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-3.jpg" alt="Matcha Strawberry" loading="lazy"></div>
+            <h3>Matcha Strawberry</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card">
+            <div class="card__img"><img src="assets/matcha-4.jpg" alt="Matcha Honey" loading="lazy"></div>
+            <h3>Matcha Honey</h3>
+            <p>Sweetened naturally for a smooth and comforting sip</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EVERYDAY -->
+    <section class="everyday" id="everyday">
+      <div class="everyday__photo" aria-hidden="true"><i></i><i></i></div>
+
+      <div class="everyday__wrap">
+        <div class="everyday__intro">
+          <div class="everyday__sticky reveal">
+            <img src="assets/everyday.svg" alt="Everyday" class="everyday__logo">
+            <p>From dawn till late, 21 hours of great taste</p>
+          </div>
+        </div>
+
+        <div class="everyday__cards">
+          <article class="card card--lg reveal">
+            <div class="card__img"><img src="assets/matcha-4.jpg" alt="Matcha Honey" loading="lazy"></div>
+            <h3>Matcha Honey</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card card--lg reveal">
+            <div class="card__img"><img src="assets/matcha-1.jpg" alt="Matcha Cheese" loading="lazy"></div>
+            <h3>Matcha Cheese</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card card--lg reveal">
+            <div class="card__img"><img src="assets/matcha-2.jpg" alt="Matcha Mint" loading="lazy"></div>
+            <h3>Matcha Mint</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+          <article class="card card--lg reveal">
+            <div class="card__img"><img src="assets/matcha-3.jpg" alt="Matcha Strawberry" loading="lazy"></div>
+            <h3>Matcha Strawberry</h3>
+            <p>From dawn till late, 21 hours of great taste</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRAP -->
+    <section class="strap" id="hours">
+      <p class="reveal"><span>Operational Hours</span> <em>09.00 - 01.00</em></p>
+    </section>
+
+    <!-- OUR FOOD -->
+    <section class="food" id="food">
+      <div class="food__ghosts" aria-hidden="true">
+        <div class="marq"><div><span>Main Course</span><span>Main Course</span><span>Main Course</span><span>Main Course</span></div></div>
+        <div class="marq marq--rev"><div><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span></div></div>
+        <div class="marq"><div><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span><span>Snack &amp; Dessert</span></div></div>
+        <div class="marq marq--rev"><div><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span></div></div>
+        <div class="marq"><div><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span><span>Bakery &amp; Cake</span></div></div>
+      </div>
+
+      <h2 class="food__title reveal">Our Food</h2>
+
+      <div class="food__grid">
+        <article class="card card--sm reveal" style="--i:0"><div class="card__img"><img src="assets/matcha-1.jpg" alt="Matcha Cheese" loading="lazy"></div><h3>Matcha Cheese</h3><p>From dawn till late, 21 hours of great taste</p></article>
+        <article class="card card--sm reveal" style="--i:1"><div class="card__img"><img src="assets/matcha-2.jpg" alt="Matcha Mint" loading="lazy"></div><h3>Matcha Mint</h3><p>A refreshing twist to keep you energized all day long</p></article>
+        <article class="card card--sm reveal" style="--i:2"><div class="card__img"><img src="assets/matcha-3.jpg" alt="Matcha Strawberry" loading="lazy"></div><h3>Matcha Strawberry</h3><p>From dawn till late, 21 hours of great taste</p></article>
+        <article class="card card--sm reveal" style="--i:3"><div class="card__img"><img src="assets/matcha-4.jpg" alt="Matcha Honey" loading="lazy"></div><h3>Matcha Honey</h3><p>Sweetened naturally for a smooth and comforting sip</p></article>
+        <article class="card card--sm reveal" style="--i:0"><div class="card__img"><img src="assets/matcha-4.jpg" alt="Matcha Honey" loading="lazy"></div><h3>Matcha Honey</h3><p>Sweetened naturally for a smooth and comforting sip</p></article>
+        <article class="card card--sm reveal" style="--i:1"><div class="card__img"><img src="assets/matcha-3.jpg" alt="Matcha Strawberry" loading="lazy"></div><h3>Matcha Strawberry</h3><p>From dawn till late, 21 hours of great taste</p></article>
+        <article class="card card--sm reveal" style="--i:2"><div class="card__img"><img src="assets/matcha-2.jpg" alt="Matcha Mint" loading="lazy"></div><h3>Matcha Mint</h3><p>A refreshing twist to keep you energized all day long</p></article>
+        <article class="card card--sm reveal" style="--i:3"><div class="card__img"><img src="assets/matcha-1.jpg" alt="Matcha Cheese" loading="lazy"></div><h3>Matcha Cheese</h3><p>From dawn till late, 21 hours of great taste</p></article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (placeholder content: ganti alamat, link sosial, dan kontak dengan data asli) -->
+  <footer class="footer" id="location">
+    <img class="footer__21" src="assets/logo-21.svg" alt="" aria-hidden="true">
+    <div class="footer__wrap">
+      <p class="footer__cta reveal">Open 21 hours. <em>Come by anytime.</em></p>
+
+      <div class="footer__cols">
+        <nav class="reveal" style="--i:1" aria-label="Footer">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#food">Menu</a></li>
+            <li><a href="#everyday">About</a></li>
+            <li><a href="#news">News</a></li>
+          </ul>
+        </nav>
+        <div class="reveal" style="--i:2">
+          <h4>Visit</h4>
+          <address>Jl. Contoh No. 21<br>Kota, Indonesia</address>
+        </div>
+        <div class="reveal" style="--i:3">
+          <h4>Hours</h4>
+          <p>Every day<br><em>09.00 - 01.00</em></p>
+        </div>
+        <div class="reveal" style="--i:4">
+          <h4>Follow</h4>
+          <ul>
+            <li><a href="#" rel="noopener">Instagram</a></li>
+            <li><a href="#" rel="noopener">TikTok</a></li>
+            <li><a href="mailto:hello@21kafe.example">hello@21kafe.example</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 21 Kafe. All rights reserved.</span>
+      <a class="footer__top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
