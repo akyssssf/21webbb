@@ -31,6 +31,16 @@
   const LENS_PX = 4, LENS_PY = 4;
   const navLinks = $$('#navlinks a').filter((a) => !a.classList.contains('nav__home'));
   const navTargets = navLinks.map((a) => $(a.getAttribute('href')));
+
+  // isi lensa = salinan item navbar (sejajar dengan aslinya); lensa di-scale saat ditekan sehingga isinya membesar
+  const lensIn = $('#lensIn');
+  const cloneUl = $('#navlinks').cloneNode(true);
+  cloneUl.removeAttribute('id');
+  cloneUl.setAttribute('aria-hidden', 'true');
+  cloneUl.querySelectorAll('a').forEach((a) => { a.removeAttribute('href'); a.setAttribute('tabindex', '-1'); });
+  lensIn.appendChild(cloneUl);
+  const cloneLinks = [...cloneUl.querySelectorAll('a')];
+  const mirror = () => cloneLinks.forEach((a, i) => { a.className = navLinks[i].className; });
   const mobile = matchMedia('(max-width: 900px)');
   let activeIdx = -1;   // section yang sedang aktif
   let shown = -1;       // posisi bubble saat ini
@@ -76,7 +86,10 @@
     bubble.style.setProperty('--bs', scale);
     bubble.style.opacity = visible ? 1 : 0;
     // highlight di latar kapsul: ikut posisi lensa, menguat saat ditekan
-    const gx = group.getBoundingClientRect().left - pill.getBoundingClientRect().left;
+    const gr = group.getBoundingClientRect();
+    bubble.style.setProperty('--gw', `${gr.width}px`);
+    bubble.style.setProperty('--gh', `${gr.height}px`);
+    const gx = gr.left - pill.getBoundingClientRect().left;
     pill.style.setProperty('--hx', `${x + w / 2 + gx}px`);
     pill.style.setProperty('--hp', scale > 1 ? 1 : 0);
     pill.style.setProperty('--hv', visible ? 1 : 0);
@@ -95,6 +108,7 @@
   const setActive = (idx) => {
     activeIdx = idx;
     navLinks.forEach((a, i) => a.classList.toggle('is-active', i === idx));
+    mirror();
     if (!dragging) { shown = idx; place(); }
   };
 
@@ -105,7 +119,7 @@
   if (document.fonts) document.fonts.ready.then(place);
 
   // press + drag ala iOS
-  let startX = 0, moved = 0, bw = 0, bh = 0, dragIdx = -1;
+  let startX = 0, moved = 0, bw = 0, bh = 0, dragIdx = -1, lastFx = 0, sxTimer = 0;
   let suppressClick = false;
   const nearest = (cx) => {
     const g = group.getBoundingClientRect();
@@ -127,6 +141,12 @@
     paint(x, bw, bh, LENS_PY, PRESS_SCALE, true);
     const hot = nearest(x + bw / 2);
     navLinks.forEach((a, i) => a.classList.toggle('is-hot', i === hot));
+    mirror();
+    // lensa sedikit meregang mengikuti kecepatan geser (efek liquid)
+    const dx = clientX - lastFx; lastFx = clientX;
+    bubble.style.setProperty('--sx', (1 + clamp(Math.abs(dx) / 45, 0, 0.16)).toFixed(3));
+    clearTimeout(sxTimer);
+    sxTimer = setTimeout(() => bubble.style.setProperty('--sx', 1), 90);
     return hot;
   };
 
@@ -137,7 +157,7 @@
     dragIdx = navLinks.indexOf(a);
     dragging = true; moved = 0; startX = e.clientX;
     const b = bubbleBox(dragIdx);
-    bw = b.w; bh = b.h;
+    bw = b.w; bh = b.h; lastFx = e.clientX;
     group.setPointerCapture(e.pointerId);
     bubble.classList.add('is-pressed');
     follow(e.clientX);
@@ -154,6 +174,9 @@
     bubble.classList.remove('is-pressed', 'is-drag');
     pill.classList.remove('is-drag');
     navLinks.forEach((a) => a.classList.remove('is-hot'));
+    mirror();
+    clearTimeout(sxTimer);
+    bubble.style.setProperty('--sx', 1);
     if (cancelled) { shown = activeIdx; place(); return; }
     // klik biasa -> link yang ditekan; drag -> link terdekat dari bubble
     const idx = moved < 4 ? dragIdx : dragIdx;
