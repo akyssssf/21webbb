@@ -76,6 +76,15 @@ b { font-weight: 700; font-style: italic; }
 .nav.is-compact .nav__home { width: 34px; height: 34px; }
 .nav__home--m { display: none; }
 
+/* Ikon tab (hanya tampil di mobile): outline saat tidak aktif, terisi saat aktif */
+.ico {
+  display: none; fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round; overflow: visible;
+}
+.ico .fill, .ico .in { transition: fill 0.3s, stroke 0.3s; }
+.nav__links a.is-active .fill, .nav__links a.is-hot .fill { fill: currentColor; }
+.nav__links a.is-active .in, .nav__links a.is-hot .in { stroke: var(--green); }
+
 .nav__bubble {
   position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; border-radius: 999px;
   width: 0; height: 0; opacity: 0;
@@ -320,41 +329,17 @@ b { font-weight: 700; font-style: italic; }
 }
 @media (max-width: 900px) {
   :root { --nav-h: 68px; }
-  .nav { top: 10px; }
-  .nav__pill { width: calc(100vw - 24px); height: 52px; padding: 0 18px; justify-content: space-between; }
-  .nav.is-compact .nav__pill { width: 210px; height: 46px; padding: 0 14px; }
-  .nav.is-open .nav__pill { width: calc(100vw - 24px); height: 52px; padding: 0 18px; }
-  .nav__home--m { display: block; width: 32px; height: 32px; }
-  .nav.is-compact .nav__home--m { width: 28px; height: 28px; }
-  .nav__homeli { display: none !important; }
-  .nav__bubble { display: none; }
-
-  .nav__burger { position: relative; display: block; width: 28px; height: 28px; flex: none; }
-  .nav__burger span {
-    position: absolute; left: 1px; width: 26px; height: 3px; background: #fff; border-radius: 2px;
-    transition: transform 0.5s var(--ease), opacity 0.3s, top 0.5s var(--ease);
+  /* Mobile: tab bar di bawah (ala iOS), pakai ikon. Aktif = terisi, tidak aktif = outline */
+  .nav { top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .nav__pill, .nav.is-compact .nav__pill { width: min(360px, calc(100vw - 24px)); height: 62px; padding: 0 8px; }
+  .nav__home--m, .nav__burger { display: none; }
+  .nav__links .nav__homeli, .nav.is-compact .nav__homeli { margin: 0 2px; flex: 0 0 auto; }
+  .nav__home, .nav.is-compact .nav__home { width: 40px; height: 40px; }
+  .nav__links a:not(.nav__home), .nav.is-compact .nav__links a:not(.nav__home) { width: 100%; padding: 14px 0; font-size: 0; }
+  .nav__links .lbl {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
-  .nav__burger span:nth-child(1) { top: 6px; }
-  .nav__burger span:nth-child(2) { top: 13px; }
-  .nav__burger span:nth-child(3) { top: 20px; }
-  .nav.is-open .nav__burger span:nth-child(1) { top: 13px; transform: rotate(45deg); }
-  .nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
-  .nav.is-open .nav__burger span:nth-child(3) { top: 13px; transform: rotate(-45deg); }
-
-  .nav__group {
-    position: absolute; left: 0; right: 0; top: calc(100% + 8px); height: auto;
-    background: rgba(28, 88, 68, 0.97); border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.18);
-    clip-path: inset(0 0 100% 0 round 28px); visibility: hidden;
-    transition: clip-path 0.55s var(--ease), visibility 0s 0.55s;
-  }
-  .nav.is-open .nav__group { clip-path: inset(0 round 28px); visibility: visible; transition-delay: 0s; }
-  .nav__links { flex-direction: column; align-items: stretch; height: auto; padding: 8px 18px 14px; }
-  .nav__links li { display: block; }
-  .nav__links a:not(.nav__home) {
-    font-size: 24px; padding: 14px 12px; text-align: left; border-radius: 16px;
-  }
-  .nav.is-compact .nav__links a:not(.nav__home) { font-size: 24px; padding: 14px 12px; }
-  .nav__links a.is-active { background: rgba(255, 255, 255, 0.14); }
+  .ico { display: block; width: 26px; height: 26px; margin: 0 auto; }
 
   .hero__content { gap: 40px; }
   .hero__title { font-size: clamp(1.9rem, 8.3vw, 4rem); }
@@ -384,7 +369,7 @@ b { font-weight: 700; font-style: italic; }
   .card--sm { padding: 12px; gap: 9px; }
   .card--sm h3, .card--sm p { font-size: 12px; }
 
-  .footer { padding: 80px 20px 28px; }
+  .footer { padding: 80px 20px 108px; }
   .footer__cols { grid-template-columns: 1fr 1fr; margin-top: 56px; gap: 28px 20px; }
   .footer address, .footer p, .footer a { font-size: 16px; }
   .footer__bottom { margin-top: 48px; }

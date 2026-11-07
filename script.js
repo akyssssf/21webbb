@@ -5,7 +5,6 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const nav = $('#nav');
-  const burger = $('#burger');
   const hero = $('#hero');
   const news = $('#news');
   const track = $('#newsTrack');
@@ -74,7 +73,7 @@
     bubble.style.opacity = visible ? 1 : 0;
   };
   const place = () => {
-    if (mobile.matches || dragging) return;
+    if (dragging) return;
     if (shown < 0) {
       // di hero: bubble disembunyikan (kecil & transparan)
       const b = bubbleBox(0);
@@ -123,7 +122,7 @@
   };
 
   group.addEventListener('pointerdown', (e) => {
-    if (mobile.matches || e.button > 0) return;
+    if (e.button > 0) return;
     const a = e.target.closest('a');
     if (!a || a.classList.contains('nav__home')) return;
     dragIdx = navLinks.indexOf(a);
@@ -174,16 +173,6 @@
     if (y + vh >= docH - 4) best = navLinks.findIndex((a) => a.getAttribute('href') === '#location');
     if (best !== activeIdx) setActive(best);
   };
-
-  /* ---------- Mobile menu ---------- */
-  const setMenu = (open) => {
-    nav.classList.toggle('is-open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
-  };
-  burger.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-  $$('.nav__links a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-  addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
 
   /* ---------- Horizontal pinned section ---------- */
   let travel = 0;
