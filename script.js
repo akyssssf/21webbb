@@ -26,7 +26,9 @@
 
   /* ---------- Navigasi: scroll + bubble ---------- */
   const group = $('#navGroup');
+  const pill = $('#navPill');
   const bubble = $('#bubble');
+  const LENS_PX = 4, LENS_PY = 4;
   const navLinks = $$('#navlinks a').filter((a) => !a.classList.contains('nav__home'));
   const navTargets = navLinks.map((a) => $(a.getAttribute('href')));
   const mobile = matchMedia('(max-width: 900px)');
@@ -62,15 +64,22 @@
   const bubbleBox = (idx) => {
     const g = group.getBoundingClientRect();
     const r = navLinks[idx].getBoundingClientRect();
-    return { w: r.width + 8, h: g.height - 8, x: r.left - g.left - 4, y: 4 };
+    // saat diam: bubble muat DI DALAM kapsul. Saat ditekan: di-scale besar sehingga menonjol keluar.
+    return { w: r.width + LENS_PX * 2, h: g.height - LENS_PY * 2, x: r.left - g.left - LENS_PX, y: LENS_PY };
   };
-  const paint = (x, w, h, y = 4, scale = 1, visible = true) => {
+  const PRESS_SCALE = 1.34;
+  const paint = (x, w, h, y = LENS_PY, scale = 1, visible = true) => {
     bubble.style.width = `${w}px`;
     bubble.style.height = `${h}px`;
     bubble.style.setProperty('--bx', `${x}px`);
     bubble.style.setProperty('--by', `${y}px`);
     bubble.style.setProperty('--bs', scale);
     bubble.style.opacity = visible ? 1 : 0;
+    // highlight di latar kapsul: ikut posisi lensa, menguat saat ditekan
+    const gx = group.getBoundingClientRect().left - pill.getBoundingClientRect().left;
+    pill.style.setProperty('--hx', `${x + w / 2 + gx}px`);
+    pill.style.setProperty('--hp', scale > 1 ? 1 : 0);
+    pill.style.setProperty('--hv', visible ? 1 : 0);
   };
   const place = () => {
     if (dragging) return;
@@ -112,10 +121,10 @@
     const g = group.getBoundingClientRect();
     const first = navLinks[0].getBoundingClientRect();
     const last = navLinks[navLinks.length - 1].getBoundingClientRect();
-    const minX = first.left - g.left - 4;
-    const maxX = last.right - g.left + 4 - bw;
+    const minX = first.left - g.left - LENS_PX;
+    const maxX = last.right - g.left + LENS_PX - bw;
     const x = clamp(clientX - g.left - bw / 2, minX, maxX);
-    paint(x, bw, bh, 4, 1.16, true);
+    paint(x, bw, bh, LENS_PY, PRESS_SCALE, true);
     const hot = nearest(x + bw / 2);
     navLinks.forEach((a, i) => a.classList.toggle('is-hot', i === hot));
     return hot;
@@ -136,13 +145,14 @@
   group.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     moved = Math.max(moved, Math.abs(e.clientX - startX));
-    if (moved > 3) bubble.classList.add('is-drag');
+    if (moved > 3) { bubble.classList.add('is-drag'); pill.classList.add('is-drag'); }
     dragIdx = follow(e.clientX);
   });
   const release = (e, cancelled) => {
     if (!dragging) return;
     dragging = false;
     bubble.classList.remove('is-pressed', 'is-drag');
+    pill.classList.remove('is-drag');
     navLinks.forEach((a) => a.classList.remove('is-hot'));
     if (cancelled) { shown = activeIdx; place(); return; }
     // klik biasa -> link yang ditekan; drag -> link terdekat dari bubble
@@ -152,6 +162,11 @@
     shown = idx; place();
     scrollToHash(navLinks[idx].getAttribute('href'));
   };
+  // matikan drag-and-drop bawaan browser untuk link (penyebab pointercancel saat digeser)
+  group.addEventListener('dragstart', (e) => e.preventDefault());
+  group.addEventListener('mousedown', (e) => e.preventDefault());
+  // iOS Safari: cegah halaman ikut scroll saat bubble digeser
+  group.addEventListener('touchmove', (e) => { if (dragging) e.preventDefault(); }, { passive: false });
   group.addEventListener('pointerup', (e) => release(e, false));
   group.addEventListener('pointercancel', (e) => release(e, true));
   // cegah klik ganda setelah pointerup (capture: jalan sebelum handler anchor)
