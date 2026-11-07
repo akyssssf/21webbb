@@ -70,9 +70,8 @@ b { font-weight: 700; font-style: italic; }
 .nav.is-compact .nav__links a:not(.nav__home) { font-size: 15px; padding: 9px 12px; }
 .nav__links a.is-hot { opacity: 1; }
 
-.nav__home { position: relative; display: block; width: 62px; height: 62px; overflow: hidden; flex: none; transition: width 0.7s var(--spring), height 0.7s var(--spring), transform 0.5s var(--ease); }
+.nav__home { position: relative; display: block; width: 62px; height: 62px; overflow: hidden; flex: none; transition: width 0.7s var(--spring), height 0.7s var(--spring); }
 .nav__home img { position: absolute; width: 110.7%; height: 136.97%; left: -0.17%; top: 0; }
-.nav__home:hover { transform: rotate(-8deg) scale(1.1); }
 .nav.is-compact .nav__home { width: 34px; height: 34px; }
 .nav__home--m { display: none; }
 
